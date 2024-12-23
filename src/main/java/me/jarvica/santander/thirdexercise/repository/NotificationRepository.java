@@ -1,0 +1,12 @@
+package me.jarvica.santander.thirdexercise.repository;
+
+import me.jarvica.santander.thirdexercise.model.Notification;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface NotificationRepository extends JpaRepository<Notification, Long> {
+
+  List<Notification> findNotificationsByRecipient(final String recipient);
+
+}
