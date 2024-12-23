@@ -13,8 +13,12 @@ import java.util.Date;
 @Component
 public final class KafkaNotificationConsumer implements NotificationConsumer<Notification> {
 
+  private final NotificationRepository repository;
+
   @Autowired
-  private NotificationRepository repository;
+  KafkaNotificationConsumer(final NotificationRepository repository) {
+    this.repository = repository;
+  }
 
   @KafkaListener(topics = Notification.TOPIC, groupId = Notification.TOPIC + "_group")
   @Override

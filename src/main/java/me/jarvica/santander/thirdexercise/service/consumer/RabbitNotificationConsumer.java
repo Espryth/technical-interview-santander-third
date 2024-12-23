@@ -14,11 +14,14 @@ import java.util.Date;
 @Component
 public final class RabbitNotificationConsumer implements NotificationConsumer<byte[]> {
 
-  @Autowired
-  private NotificationRepository repository;
+  private final NotificationRepository repository;
+  private final ObjectMapper objectMapper;
 
   @Autowired
-  private ObjectMapper objectMapper;
+  RabbitNotificationConsumer(final NotificationRepository repository, final ObjectMapper objectMapper) {
+    this.repository = repository;
+    this.objectMapper = objectMapper;
+  }
 
   @RabbitListener(queues = Notification.TOPIC)
   @Override
